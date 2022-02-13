@@ -1,31 +1,21 @@
-import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.funsuite.AnyFunSuite
 
-class IntegersTest extends AnyFlatSpec {
-  val zero: Zero.type = Zero
-  val one = new Succ(zero)
-  val two = new Succ(one)
-  val three = new Succ(two)
-  "Condition Predecessor" should "give predecessor of one is zero " in {
+class IntTester extends AnyFunSuite {
+  val zero =  Zero
+  val one =  new Successor(zero)
+  val two = new Successor(one)
+  val three = new Successor(two)
+
+  test("Test one"){
     assert(one.predecessor.isZero)
   }
-  "Condition Successor  with  - " should "give Successor  of 2-1 " in {
-    assert(!two.-(one).successor.isZero)
-  }
-  "Condition Successor" should "give successor of zero" in {
-    assert(!zero.successor.isZero)
-  }
-  "Condition Predecessor with  - " should "give predecessor of 1-0" in {
-    assert(one.-(zero).predecessor.isZero)
-  }
-  "Condition Successor  with  + " should "give Successor  of 1+0 " in {
-    assert(!one.+(zero).successor.isZero)
-  }
-  "Condition Predecessor and + " should "give predecessor of 3-2 " in {
-    assert(three.-(two).predecessor.isZero)
-  }
-  "Condition Predecessor of one" should "give zero " in {
+  test("Test two"){
     assert(one.predecessor == zero)
   }
+  test("Test three"){
+    assert(one.+(two).predecessor.predecessor.predecessor.isZero)
+  }
+  test("Test four"){
+    assert(two.-(one) == one)
+  }
 }
-
-
